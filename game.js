@@ -1,10 +1,8 @@
 const btnROCK = document.getElementById("btnROCK");
 const btnPAPER = document.getElementById("btnPAPER");
 const btnSCISSORS = document.getElementById("btnSCISSORS");
-
 const screenScorePc = document.getElementById("scorePC");
 const screenScoreUser = document.getElementById("scoreUSER");
-
 const screenWinner = document.getElementById("winner");
 const screenWinnerP = document.getElementById("winnerP");
 
@@ -12,12 +10,10 @@ btnROCK.addEventListener("click", () => {
 	/* console.log("btnROCK clicked!"); */
 	game("ROCK");
 });
-
 btnPAPER.addEventListener("click", () => {
 	/* console.log("btnPAPER clicked!"); */
 	game("PAPER");
 });
-
 btnSCISSORS.addEventListener("click", () => {
 	/* console.log("btnSCISSORS clicked!"); */
 	game("SCISSORS");
@@ -63,12 +59,8 @@ function playRound(playerSelection, computerSelection) {
 
 function game(playerSelection) {
 	let computerSelection;
-	let playerScore;
-	let computerScore;
-
 	screenScorePc.setAttribute("style", "visibility: visible;");
 	screenScoreUser.setAttribute("style", "visibility: visible;");
-
 	/* console.log(playerSelection); */
 	computerSelection = computerPlay();
 	let result = playRound(playerSelection, computerSelection);
@@ -91,9 +83,14 @@ function score(result) {
 	if (result === "playerLOST") {
 		computerScore++;
 		console.log(`Computer score is: ${computerScore}`);
+		screenScorePc.textContent = "Computer score is: " + computerScore;
 	} else if (result === "playerWIN") {
 		playerScore++;
 		console.log(`Player score is: ${playerScore}`);
+		screenScoreUser.textContent = "Player score is: " + playerScore;
+	}
+	if (playerScore != 0 || computerScore != 0) {
+		screenWinnerP.textContent = "GOOD LUCK!";
 	}
 	if (playerScore === 5) {
 		screenScorePc.setAttribute("style", "visibility:hidden;");
@@ -101,7 +98,7 @@ function score(result) {
 		screenWinner.setAttribute("style", "visibility: visible;");
 		screenWinnerP.textContent = "The winner is: PLAYER!";
 		screenWinnerP.setAttribute("style", "visibility: visible;");
-		/* resetScore(); */
+		resetScore();
 		console.log(`PLAYER WINS!`);
 	} else if (computerScore === 5) {
 		screenScorePc.setAttribute("style", "visibility:hidden;");
@@ -109,7 +106,7 @@ function score(result) {
 		screenWinner.setAttribute("style", "visibility: visible;");
 		screenWinnerP.textContent = "The winner is: PC!";
 		screenWinnerP.setAttribute("style", "visibility: visible;");
-		/* resetScore(); */
+		resetScore();
 		console.log(`COMPUTER WINS!`);
 	}
 }
